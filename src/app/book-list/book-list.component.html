@@ -4,11 +4,22 @@
     <h1 class="mat-h1">Liste</h1>
   <mat-grid-list cols="2" rowHeight="350px">
     <mat-grid-tile *ngIf="offers" [colspan]="2" [rowspan]="1">
-      <div *ngFor= "let offer of offers['offers']">
-        {{offer.type}}
-        {{offer.value}}
-
-      </div>
+      <mat-card  class="dashboard-card">
+        
+        <mat-card-header>
+          <mat-card-title>
+            Offres
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div *ngFor= "let offer of offers['offers']">
+            {{offer.type}}
+            {{offer.value}}
+    
+          </div>
+        </mat-card-content>
+      </mat-card> 
+      
       <!-- <mat-card  class="dashboard-card">
         
         <mat-card-header>
