@@ -1,0 +1,39 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile *ngFor="let card of books" [colspan]="1" [rowspan]="3">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          
+          <mat-card-title>
+            {{card.title}}
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            
+            <mat-chip-list selectable="false">
+              <mat-chip>{{card.price}}€</mat-chip>
+            </mat-chip-list>
+            
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item>Expand</button>
+              <button mat-menu-item>Remove</button>
+            </mat-menu>
+          </mat-card-title>
+          <mat-card-subtitle>ISBN : {{card.isbn}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <img class="cardImage" src={{card.cover}} alt="Photo of a Shiba Inu">
+          <p *ngFor = "let syn of card['synopsis']">
+            {{syn}}
+        </p>
+        </mat-card-content>
+        <mat-card-footer>
+          <mat-chip-list selectable="false">
+            <mat-chip>{{card.price}}€</mat-chip>
+          </mat-chip-list>
+        </mat-card-footer>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

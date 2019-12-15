@@ -1,4 +1,67 @@
-<ul *ngIf="books">
+<app-top-bar (onSelectedOption)="onSelectedOption($event)"></app-top-bar>
+<button (click)="getOffers()">Get Offers</button>
+  <div class="grid-container">
+    <h1 class="mat-h1">Liste</h1>
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile *ngIf="offers" [colspan]="2" [rowspan]="1">
+      <div *ngFor= "let offer of offers['offers']">
+        {{offer.type}}
+        {{offer.value}}
+
+      </div>
+      <!-- <mat-card  class="dashboard-card">
+        
+        <mat-card-header>
+          <mat-card-title>
+            
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          
+        </mat-card-content>
+      </mat-card> -->
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let card of books" [colspan]="1" [rowspan]="3">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{card.title}}
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item>Expand</button>
+              <button mat-menu-item>Remove</button>
+            </mat-menu>
+          </mat-card-title>
+          <mat-card-subtitle>ISBN : {{card.isbn}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <img class="cardImage" src={{card.cover}} alt="Photo of a Shiba Inu">
+          <p *ngFor = "let syn of card['synopsis']">
+            {{syn}}
+        </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <span>Prix: {{card.price}}</span>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+  </div>
+  <!-- <mat-grid-list cols="2" rowHeight="500px">
+    <mat-grid-tile *ngFor="let book of books"  [colspan]="1" [rowspan]="1">
+      <h3 class="mat-h3">{{book.title}}</h3>
+      <span>{{book.isbn}}</span>
+      <img src={{book.cover}}>
+      <p *ngFor = "let syn of book['synopsis']">
+        {{syn}}
+       </p>
+       <span>Prix : {{book.price}}</span>
+    </mat-grid-tile>
+  </mat-grid-list> -->
+
+<!-- <ul *ngIf="books">
     <li *ngFor = "let book of books">
         <mat-card class="example-card">
         <mat-card-header>
@@ -18,6 +81,5 @@
           <button mat-button>SHARE</button>
         </mat-card-actions>
       </mat-card></li>
-</ul>
-<button (click)="getOffers()">Send it all</button>
+</ul> -->
 

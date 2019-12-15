@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../http.service'
+import { DataService } from '../data.service'
+import { Books, Offers } from '../book';
 
 @Component({
   selector: 'app-book-list',
@@ -8,28 +9,45 @@ import { HttpService } from '../http.service'
 })
 export class BookListComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
-  books : any;
+  constructor(private data: DataService) { }
+  books : Books;
+  offers : Offers;
   ngOnInit() {
     this.getBooks();
     
   }
   getBooks(){
-    this.http.httpGet().subscribe(books =>{
+    this.data.httpGet().subscribe(books =>{
       this.books = books;
+      this.data.books = books;
       console.log(books)
     })
   }
-  getOffers(){
+  public getOffers(){
     let isbns = [];
-    this.books.forEach(element => {
+    let selection = this.data.filteredListOptions();
+    console.log({selection});
+    if(selection.length <= 0){
+      return;
+    }
+    selection.forEach(element => {
       isbns.push(element.isbn);
     });
-    console.log(isbns);
     let queryString = isbns.concat(',');
-    this.http.httpOffers(queryString).subscribe(offers =>{
-      console.log(offers);
+    this.data.httpOffers(queryString).subscribe(offers =>{
+      this.offers = offers;
+      console.log({offers});
     })
   }
-
+  
+  onSelectedOption(e) {
+    this.getFilteredExpenseList();
+  }
+  getFilteredExpenseList() {
+    if (this.data.searchOption.length > 0)
+      this.books = this.data.filteredListOptions();
+    else {
+      this.books = this.data.books;
+    }
+  }
 }
