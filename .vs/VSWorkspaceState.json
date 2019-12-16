@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\book-list"
+  ],
+  "SelectedNode": "\\src\\app\\book-list\\book-list.component.scss",
+  "PreviewInSolutionExplorer": false
+}

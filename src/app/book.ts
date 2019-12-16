@@ -8,7 +8,7 @@ export interface Book {
 
 export interface Books extends Array<Book>{}
 
-interface Offer { 
+export interface Offer { 
     type: string,
     sliceValue?: number,
     value: number

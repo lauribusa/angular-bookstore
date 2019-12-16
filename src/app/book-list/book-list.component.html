@@ -1,5 +1,5 @@
 <app-top-bar (onSelectedOption)="onSelectedOption($event)"></app-top-bar>
-<button (click)="getOffers()">Get Offers</button>
+<button mat-button (click)="getOffers()">Get Offers</button>
   <div class="grid-container">
     <h1 class="mat-h1">Liste</h1>
   <mat-grid-list cols="2" rowHeight="350px">
@@ -12,38 +12,21 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <div *ngFor= "let offer of offers['offers']">
-            {{offer.type}}
-            {{offer.value}}
-    
-          </div>
+          <span class="deal"><h2 *ngIf="bestOffer" class="bestValue mat-h2">Best value !</h2><p>{{bestOffer.type}}</p><p *ngIf="bestOffer.sliceValue">{{offer.sliceValue}}</p><p>-{{bestOffer.value}}€</p></span>
+          <!-- <div *ngFor= "let offer of offers['offers']; let i = index" [attr.data-index]="i">
+             <span class="deal"><b *ngIf="minus" class="bestValue">Best value !</b><p>{{offer.type}}</p></span>
+            <span ><b *ngIf="slice"  class="bestValue">Best value !</b><p *ngIf="offer.sliceValue">{{offer.sliceValue}}</p></span>
+             <span><b  *ngIf="percentage"  class="bestValue">Best value !</b><p>{{offer.value}}</p></span>
+          </div> -->
         </mat-card-content>
       </mat-card> 
-      
-      <!-- <mat-card  class="dashboard-card">
-        
-        <mat-card-header>
-          <mat-card-title>
-            
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          
-        </mat-card-content>
-      </mat-card> -->
+    
     </mat-grid-tile>
     <mat-grid-tile *ngFor="let card of books" [colspan]="1" [rowspan]="3">
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
             {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
           </mat-card-title>
           <mat-card-subtitle>ISBN : {{card.isbn}}</mat-card-subtitle>
         </mat-card-header>
@@ -53,44 +36,12 @@
             {{syn}}
         </p>
         </mat-card-content>
-        <mat-card-actions>
-          <span>Prix: {{card.price}}</span>
-        </mat-card-actions>
+        <mat-card-footer>
+          <h4 class="mat-h4">Prix: {{card.price}}</h4>
+        </mat-card-footer>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
   </div>
-  <!-- <mat-grid-list cols="2" rowHeight="500px">
-    <mat-grid-tile *ngFor="let book of books"  [colspan]="1" [rowspan]="1">
-      <h3 class="mat-h3">{{book.title}}</h3>
-      <span>{{book.isbn}}</span>
-      <img src={{book.cover}}>
-      <p *ngFor = "let syn of book['synopsis']">
-        {{syn}}
-       </p>
-       <span>Prix : {{book.price}}</span>
-    </mat-grid-tile>
-  </mat-grid-list> -->
-
-<!-- <ul *ngIf="books">
-    <li *ngFor = "let book of books">
-        <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>{{book.title}}</mat-card-title>
-          <mat-card-subtitle>ISBN : {{book.isbn}}</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src={{book.cover}} alt="Photo of a Shiba Inu">
-        <mat-card-content>
-            <p *ngFor = "let syn of book['synopsis']">
-                {{syn}}
-            </p>
-          <span>Prix : {{book.price}}</span>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card></li>
-</ul> -->
+  
 
